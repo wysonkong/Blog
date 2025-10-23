@@ -2,16 +2,16 @@ version: "3.8"
 
 services:
   postgres-db:
-    container_name: cambioReact
+    container_name: cambioReact # change this
     image: postgres:latest
     restart: always
     environment:
       POSTGRES_USER: acc_dev
       POSTGRES_PASSWORD: acc_dev12
-      POSTGRES_DB: cambioReact_db
+      POSTGRES_DB: cambioReact_db # change this
       POSTGRES_HOST_AUTH_METHOD: password
     ports:
-      - "5419:5432"
+      - "5419:5432" # change this
     volumes:
       - postgresql_data:/var/lib/postgresql/data
 
@@ -19,29 +19,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: cambioReact-backend
+    container_name: cambioReact-backend # change this
     ports:
       - "8080:8080"
-    env_file:
-      - .env
-    volumes:
-      # Mount GitHub private key at runtime (read-only)
-      - ./secrets/github-app-pkcs8.pem:/app/config/github-app-pkcs8.pem:ro
     depends_on:
       - postgres-db
 
     command: ["/app/wait-for-postgres.sh", "postgres-db", "java", "-jar", "/app/app.jar"]
 
-    environment:
-      GITHUB_APP_ID: ${GITHUB_APP_ID}
-      GITHUB_INSTALLATION_ID: ${GITHUB_INSTALLATION_ID}
-      GITHUB_OWNER: ${GITHUB_OWNER}
-      GITHUB_REPO: ${GITHUB_REPO}
-      GITHUB_PRIVATE_KEY_PATH: ${GITHUB_PRIVATE_KEY_PATH}
-      GITHUB_PRIVATE_KEY: ${GITHUB_PRIVATE_KEY}
-      SPRING_DATASOURCE_URL: ${DB_URL}
-      SPRING_DATASOURCE_USERNAME: ${DB_USER}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASS}
 
 volumes:
   postgresql_data:
