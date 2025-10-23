@@ -1,31 +1,37 @@
-# Node modules
-node_modules/
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
-# Vite build output
-dist/
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
-# Local environment files
-.env
-.env.local
-.env.*.local
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
-# OS-specific files
-.DS_Store
-Thumbs.db
-
-# Editor directories
+### VS Code ###
 .vscode/
-.idea/
-
-# Optional cache
-.cache/
-
