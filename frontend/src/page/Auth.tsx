@@ -8,7 +8,7 @@ import {toast} from "sonner";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
 
 const Auth = () => {
-    const {login} = useAuth();
+    const {handleLogin} = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [feedback, setFeedback] = useState("");
@@ -16,7 +16,8 @@ const Auth = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-    }, [username]);
+        console.log(username, password);
+    }, [username, password]);
 
     return (
         <div className="w-screen h-screen flex items-center justify-center">
@@ -30,7 +31,7 @@ const Auth = () => {
                     <TabsContent value={"login"}>
                         <h2 className="text-2xl text-card-foreground font-bold text-center mb-6">Log In To Your
                             Account</h2>
-                        <form onSubmit={() => console.log("clicked login")}>
+                        <form onSubmit={(e) => {e.preventDefault(); handleLogin(username, password)}}>
                             <FieldSet className={""}>
                                 <FieldGroup>
                                     <Field>

@@ -3,9 +3,12 @@ import type {User} from "@/interface/User.tsx";
 
 export async function login(username: string, password: string): Promise<User>  {
    try {
-       const res = await axios.put("http://localhost:8080/api/users/login", {
-           username: username,
-           password: password
+       console.log(username, password);
+       const res = await axios.put("http://localhost:8080/api/users/login", null,  {
+           params: {
+               username,
+               password
+           }
        })
        return res.data as User;
    } catch(error) {
