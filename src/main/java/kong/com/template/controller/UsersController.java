@@ -5,13 +5,12 @@ import kong.com.template.service.UsersService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/users")
+@RestController
+@RequestMapping("/api/users")
 public class UsersController {
     public UsersService usersService;
 
@@ -19,7 +18,7 @@ public class UsersController {
         this.usersService = usersService;
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<Users> saveUser(Users user){
         Users createdUser = usersService.saveUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
@@ -29,6 +28,19 @@ public class UsersController {
     public ResponseEntity<List<Users>> getUsers() {
         List<Users> users = usersService.getUsers();
         return ResponseEntity.ok(users);
+    }
+
+    @PutMapping("/login")
+    public ResponseEntity<Users> login(@RequestParam String username, @RequestParam String password) {
+        try {
+            return ResponseEntity.ok(usersService.login(username, password));
+        } catch(Exception e) {
+            if(e.getMessage().equals("Wrong Password")) {
+                return ResponseEntity.badRequest().build();
+            }else {
+                return ResponseEntity.notFound().build();
+            }
+        }
     }
 
 
