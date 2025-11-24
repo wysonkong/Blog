@@ -3,8 +3,7 @@ import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "@/provider/AuthProvider.tsx";
-import React, {useEffect, useState} from "react";
-import {toast} from "sonner";
+import {useEffect, useState} from "react";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
 
 const Auth = () => {
@@ -64,7 +63,10 @@ const Auth = () => {
                                     </Field>
                                     <Field orientation="horizontal">
                                         <Button type="submit"
-                                                className={"bg-accent text-accent-foreground"}>Submit</Button>
+                                                className={"bg-accent text-accent-foreground"}
+                                        >
+                                            Submit
+                                        </Button>
                                         <Button variant="outline" type="button"
                                                 className={"bg-foreground text-background"}>Cancel</Button>
                                     </Field>

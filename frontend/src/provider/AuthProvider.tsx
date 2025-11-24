@@ -1,6 +1,7 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {login, getUserById} from "@/client/Client.ts"
 import type {User} from "@/interface/User.tsx"
+import {useNavigate} from "react-router";
 
 
 interface AuthContextType {
@@ -13,6 +14,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthProvider = ({children}: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -38,6 +40,7 @@ const AuthProvider = ({children}: { children: React.ReactNode }) => {
         if(!user) return;
         sessionStorage.setItem("user", user.toString());
         console.log(user)
+        if (user) navigate("/home");
     };
 
     const handleLogout = () => {

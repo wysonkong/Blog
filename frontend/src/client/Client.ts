@@ -1,5 +1,6 @@
 import axios from "axios";
 import type {User} from "@/interface/User.tsx";
+import {toast} from "sonner";
 
 export async function login(username: string, password: string): Promise<User>  {
    try {
@@ -10,6 +11,7 @@ export async function login(username: string, password: string): Promise<User>  
                password
            }
        })
+       toast.success("login successful")
        return res.data as User;
    } catch(error) {
        console.error(error);
