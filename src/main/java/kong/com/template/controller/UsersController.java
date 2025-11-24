@@ -30,6 +30,11 @@ public class UsersController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Users> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(usersService.getUserById(id));
+    }
+
     @PutMapping("/login")
     public ResponseEntity<Users> login(@RequestParam String username, @RequestParam String password) {
         try {

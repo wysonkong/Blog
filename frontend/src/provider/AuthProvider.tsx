@@ -1,58 +1,57 @@
 import {createContext, useContext, useEffect, useState} from "react";
+import {login, getUserById} from "@/client/Client.ts"
+import type {User} from "@/interface/User.tsx"
 
 
 interface AuthContextType {
-    isLoggedIn: boolean;
-    userId: string | null;
-    login: (sessionId: string, userId: string) => void;
-    logout: () => void;
+    handleLogin: (username: string, password: string) => void;
+    handleLogout: () => void;
+    user: User| null;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({children}: { children: React.ReactNode }) => {
+const AuthProvider = ({children}: { children: React.ReactNode }) => {
+    const [user, setUser] = useState<User | null>(null);
 
-
-    const [isLoggedIn, setIsLoggedIn] = useState(() => {
-        return !!sessionStorage.getItem("sessionId")
-    });
-    const [userId, setUserId] = useState<string | null>(() => {
-        return sessionStorage.getItem("userId");
-    });
 
     useEffect(() => {
-        const storedSessionId = sessionStorage.getItem("sessionId");
-        const storedUserId: string | null = sessionStorage.getItem("userId");
+        async function loadUser() {
+            const storedUserId = sessionStorage.getItem("userId");
 
-        if (storedSessionId && storedUserId) {
-            setIsLoggedIn(true);
-            setUserId(storedUserId);
+            if (storedUserId) {
+                const curUser = await getUserById(Number(storedUserId));
+                setUser(curUser);
+            }
+            else {
+                setUser(null)
+            }
         }
-
+        loadUser();
     }, []);
 
 
-    const login = (sessionId: string, newUserId: string) => {
-        sessionStorage.setItem("sessionId", sessionId);
-        sessionStorage.setItem("userId", newUserId);
-        setIsLoggedIn(true);
-        setUserId(newUserId);
-        console.log(newUserId)
+
+    const handleLogin = async (username: string, password: string) => {
+        const curUser = await login(username, password);
+        setUser(curUser);
+        if(!user) return;
+        sessionStorage.setItem("user", user.toString());
+        console.log(user)
     };
 
-    const logout = () => {
+    const handleLogout = () => {
         sessionStorage.removeItem("sessionId");
         sessionStorage.removeItem("userId");
-        setIsLoggedIn(false);
-        setUserId(null);
     };
 
     return (
-        <AuthContext.Provider value={{isLoggedIn, userId, login, logout}}>
+        <AuthContext.Provider value={{ handleLogin, handleLogout, user}}>
             {children}
         </AuthContext.Provider>
     );
 };
+export default AuthProvider
 
 export const useAuth = () => {
     const context = useContext(AuthContext);
