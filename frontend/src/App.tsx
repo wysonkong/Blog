@@ -6,10 +6,9 @@ import Ack from "@/page/Ack.tsx";
 import Layout from "@/Layout.tsx";
 import Unauth from "@/page/Unauth.tsx";
 import Home from "@/page/Home.tsx";
-import Login from "@/page/Login.tsx";
+import Auth from "@/page/Auth.tsx";
 
 function App() {
-
     return (
         <AuthProvider>
             <UserProvider>
@@ -19,7 +18,7 @@ function App() {
                             <Route path={"/"} element={<Ack/>}/>
                             <Route path={"/denied"} element={<Unauth/>}/>
                             <Route path={"/home"} element={<Home/>}/>
-                            <Route path={"/login"} element={<Login/>}/>
+                            <Route path={"/auth"} element={<Auth/>}/>
                         </Routes>
                     </Layout>
                 </Router>
