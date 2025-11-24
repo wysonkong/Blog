@@ -5,6 +5,7 @@ import {UserProvider} from "@/provider/UserProvider.tsx";
 import Ack from "@/page/Ack.tsx";
 import Layout from "@/Layout.tsx";
 import Unauth from "@/page/Unauth.tsx";
+import Home from "@/page/Home.tsx";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
                         <Routes>
                             <Route path={"/"} element={<Ack/>}/>
                             <Route path={"/denied"} element={<Unauth/>}/>
+                            <Route path={"/home"} element={<Home/>}/>
                         </Routes>
                     </Layout>
                 </Router>
