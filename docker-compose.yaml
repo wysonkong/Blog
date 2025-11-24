@@ -2,30 +2,18 @@ version: "3.8"
 
 services:
   postgres-db:
-    container_name: cambioReact # change this
+    container_name: modB # change this
     image: postgres:latest
     restart: always
     environment:
       POSTGRES_USER: acc_dev
       POSTGRES_PASSWORD: acc_dev12
-      POSTGRES_DB: cambioReact_db # change this
+      POSTGRES_DB: modB_db # change this
       POSTGRES_HOST_AUTH_METHOD: password
     ports:
-      - "5419:5432" # change this
+      - "5418:5432" # change this
     volumes:
-      - postgresql_data:/var/lib/postgresql/data
-
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: cambioReact-backend # change this
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres-db
-
-    command: ["/app/wait-for-postgres.sh", "postgres-db", "java", "-jar", "/app/app.jar"]
+      - postgresql_data:/var/lib/postgresql
 
 
 volumes:
