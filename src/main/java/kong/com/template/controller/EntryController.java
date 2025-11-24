@@ -23,4 +23,9 @@ public class EntryController {
         return ResponseEntity.ok(entryService.getEntryById(id));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<Entry>> getAllEntries() {
+        return ResponseEntity.ok(entryService.getAllEntries());
+    }
+
 }
