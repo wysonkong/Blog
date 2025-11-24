@@ -36,4 +36,8 @@ public class UsersService {
             throw new NoSuchElementException("No user found");
         }
     }
+
+    public Users getUserById(Long id) {
+        return usersRepository.getUsersById(id);
+    }
 }

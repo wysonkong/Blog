@@ -1,6 +1,6 @@
 import './App.css'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import {AuthProvider} from "@/provider/AuthProvider.tsx";
+import AuthProvider from "@/provider/AuthProvider.tsx";
 import {UserProvider} from "@/provider/UserProvider.tsx";
 import Ack from "@/page/Ack.tsx";
 import Layout from "@/Layout.tsx";
