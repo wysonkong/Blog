@@ -1,4 +1,4 @@
-import {Field, FieldDescription, FieldGroup, FieldLabel, FieldSet} from "@/components/ui/field.tsx";
+import {Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldSet} from "@/components/ui/field.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useNavigate} from "react-router";
 
@@ -18,10 +18,8 @@ const Ack = () => {
                         </Field>
                         <Field>
                             <FieldLabel htmlFor="disclaimer" className={"text-card-foreground"}>Disclaimer</FieldLabel>
-                            <FieldDescription>
-                                <div className={"grid"}>
+                            <FieldContent>
                                     <span className={"mb-2"}>By posting, uploading, or submitting any content on this website (“Site”), you acknowledge and agree that: </span>
-
                                     <ul className={"list-disc ml-4"}>
                                         <li>All content you share is public and may be viewed, recorded, moderated, or
                                             used by the Site administrators.
@@ -31,15 +29,11 @@ const Ack = () => {
                                         </li>
                                         <li>Do not post any confidential, sensitive, or private information.</li>
                                     </ul>
-                                </div>
-
-                            </FieldDescription>
+                            </FieldContent>
                         </Field>
                         <Field>
-                            <FieldDescription>
-                                <div className={"grid"}>
+                            <FieldContent>
                                     <span className={"mb-2"}>This Site is moderated by Wyson and Tyler (“Site Administrators”). By using this Site, you agree to: </span>
-
                                     <ul className={"list-disc ml-4"}>
                                         <li>Follow all instructions, rules, and moderation decisions made by Wyson and
                                             Tyler.
@@ -51,13 +45,11 @@ const Ack = () => {
                                             context of this Site.
                                         </li>
                                     </ul>
-                                </div>
-
-                            </FieldDescription>
+                            </FieldContent>
                         </Field>
                         <Field orientation="horizontal">
                             <Button type="submit"
-                                    onClick={() => navigate("/login")}
+                                    onClick={() => navigate("/auth")}
                                     className={"bg-accent text-accent-foreground"}>
                                 Acknowledge
                             </Button>
