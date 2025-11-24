@@ -57,7 +57,7 @@ const Ack = () => {
                         </Field>
                         <Field orientation="horizontal">
                             <Button type="submit"
-                                    onClick={() => navigate("/home")}
+                                    onClick={() => navigate("/login")}
                                     className={"bg-accent text-accent-foreground"}>
                                 Acknowledge
                             </Button>
