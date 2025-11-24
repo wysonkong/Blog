@@ -16,8 +16,6 @@ public class Users {
     @Column(nullable = false)
     private String password;
     private Date lastLogin;
-    @Enumerated(EnumType.STRING)
-    private Role role;
 
     public Users(String username, String password) {
         this.username = username;
@@ -59,11 +57,4 @@ public class Users {
         this.lastLogin = lastLogin;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }

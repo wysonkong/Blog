@@ -2,16 +2,16 @@ version: "3.8"
 
 services:
   postgres-db:
-    container_name: modB # change this
+    container_name: camping_blog # change this
     image: postgres:latest
     restart: always
     environment:
       POSTGRES_USER: acc_dev
       POSTGRES_PASSWORD: acc_dev12
-      POSTGRES_DB: modB_db # change this
+      POSTGRES_DB: camping_blog_db # change this
       POSTGRES_HOST_AUTH_METHOD: password
     ports:
-      - "5418:5432" # change this
+      - "5412:5432" # change this
     volumes:
       - postgresql_data:/var/lib/postgresql
 

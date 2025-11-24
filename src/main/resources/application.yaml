@@ -1,9 +1,9 @@
 spring:
   application:
-    name: template #change this
+    name: camping_blog #change this
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/template
+    url: jdbc:postgresql://localhost:5412/camping_blog_db
     username: acc_dev
     password: acc_dev12
 
