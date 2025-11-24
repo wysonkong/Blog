@@ -5,6 +5,7 @@ import kong.com.template.repository.UsersRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class UsersService {
@@ -20,5 +21,19 @@ public class UsersService {
 
     public List<Users> getUsers() {
         return usersRepository.findAll();
+    }
+
+
+    public Users login(String username, String password) throws Exception{
+        try {
+            Users user = usersRepository.findUsersByUsername(username);
+            if(user.getPassword().equals(password)) {
+                return user;
+            } else {
+                throw new RuntimeException("Wrong Password");
+            }
+        } catch(Exception e) {
+            throw new NoSuchElementException("No user found");
+        }
     }
 }
