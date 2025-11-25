@@ -7,6 +7,7 @@ import Layout from "@/Layout.tsx";
 import Unauth from "@/page/Unauth.tsx";
 import Home from "@/page/Home.tsx";
 import Auth from "@/page/Auth.tsx";
+import EntryPage from "@/page/EntryPage.tsx";
 
 function App() {
     return (
@@ -20,6 +21,8 @@ function App() {
                             <Route path={"/denied"} element={<Unauth/>}/>
                             <Route path={"/home"} element={<Home/>}/>
                             <Route path={"/auth"} element={<Auth/>}/>
+                            <Route path={"/entry/:id"} element={<EntryPage/>}/>
+                            <Route path={"/entry"} element={<EntryPage/>}/>
                         </Routes>
                     </Layout>
                 </UserProvider>
