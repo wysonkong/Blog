@@ -21,8 +21,7 @@ function App() {
                             <Route path={"/denied"} element={<Unauth/>}/>
                             <Route path={"/home"} element={<Home/>}/>
                             <Route path={"/auth"} element={<Auth/>}/>
-                            <Route path={"/entry/:id"} element={<EntryPage/>}/>
-                            <Route path={"/entry"} element={<EntryPage/>}/>
+                            <Route path={`/entry/:id`} element={<EntryPage/>}/>
                         </Routes>
                     </Layout>
                 </UserProvider>
