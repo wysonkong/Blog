@@ -15,6 +15,7 @@ public class Users {
 
     @Column(nullable = false)
     private String password;
+
     private Date lastLogin;
 
     public Users(String username, String password) {

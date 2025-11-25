@@ -2,8 +2,10 @@ package kong.com.template.service;
 
 import kong.com.template.entity.Users;
 import kong.com.template.repository.UsersRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -15,8 +17,14 @@ public class UsersService {
         this.usersRepository = usersRepository;
     }
 
-    public Users saveUser(Users user) {
-        return usersRepository.save(user);
+    public Users saveUser(String username, String password) {
+        Users newUser = new Users(username, password);
+        newUser.setLastLogin(new Date());
+        try {
+            return usersRepository.save(newUser);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Username is already taken");
+        }
     }
 
     public List<Users> getUsers() {
@@ -28,6 +36,7 @@ public class UsersService {
         try {
             Users user = usersRepository.findUsersByUsername(username);
             if(user.getPassword().equals(password)) {
+                user.setLastLogin(new Date());
                 return user;
             } else {
                 throw new RuntimeException("Wrong Password");
