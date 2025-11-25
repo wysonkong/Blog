@@ -20,10 +20,10 @@ const AuthProvider = ({children}: { children: React.ReactNode }) => {
 
     useEffect(() => {
         async function loadUser() {
-            const storedUserId = sessionStorage.getItem("userId");
-
-            if (storedUserId) {
-                const curUser = await getUserById(Number(storedUserId));
+            const storedUser = sessionStorage.getItem("userId");
+            console.log(storedUser);
+            if (storedUser) {
+                const curUser = await getUserById(Number(storedUser));
                 setUser(curUser);
             }
             else {
@@ -38,24 +38,24 @@ const AuthProvider = ({children}: { children: React.ReactNode }) => {
     const handleLogin = async (username: string, password: string) => {
         const curUser = await login(username, password);
         setUser(curUser);
-        if(!user) return;
-        sessionStorage.setItem("user", user.toString());
-        console.log(user)
-        if (user) navigate("/home");
+        if(!curUser) return;
+        sessionStorage.setItem("userId", curUser.id.toString());
+        console.log(curUser)
+        if (curUser) navigate("/home");
     };
 
     const handleSignUp = async (username: string, password: string) => {
         const curUser = await signUp(username, password);
         setUser(curUser);
-        if(!user) return;
-        sessionStorage.setItem("user", user.toString());
-        console.log(user)
-        if (user) navigate("/home");
+        if(!curUser) return;
+        sessionStorage.setItem("userId", curUser.id.toString());
+        console.log(curUser)
+        if (curUser) navigate("/home");
     }
 
     const handleLogout = () => {
-        sessionStorage.removeItem("sessionId");
         sessionStorage.removeItem("userId");
+        setUser(null);
     };
 
     return (
