@@ -14,7 +14,7 @@ export function Nav() {
     const {user, handleLogout} = useAuth();
 
     return (
-        <NavigationMenu >
+        <NavigationMenu className={"flex justify-center items-center mb-14"}>
             <NavigationMenuList className="flex-wrap">
                 <NavigationMenuItem>
                     <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>

@@ -73,6 +73,12 @@ export async function addEntry(title: string, message: string, files: FileList) 
 
     } catch(error) {
         console.log(error);
+export async function getEntries(): Promise<Entry[]> {
+    try {
+        const res = await axios.get("http://localhost:8080/api/entry/all")
+        return res.data as Entry[]
+    } catch (error) {
+        console.error(error);
         throw error;
     }
 }
