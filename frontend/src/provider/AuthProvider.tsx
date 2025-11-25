@@ -56,6 +56,7 @@ const AuthProvider = ({children}: { children: React.ReactNode }) => {
     const handleLogout = () => {
         sessionStorage.removeItem("sessionId");
         sessionStorage.removeItem("userId");
+        setUser(null);
     };
 
     return (
