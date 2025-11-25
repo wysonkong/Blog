@@ -53,7 +53,7 @@ export async function signUp(username: string, password: string): Promise<User> 
 
 export async function getEntryById(entryId: number): Promise<Entry> {
     try {
-        const res = await axios.get("http://localhost:8080/api/entrty/" + entryId)
+        const res = await axios.get("http://localhost:8080/api/entry/" + entryId)
         return res.data as Entry;
     } catch(error) {
         console.log(error);
@@ -71,8 +71,11 @@ export async function addEntry(title: string, message: string, files: FileList) 
             }
         })
 
-    } catch(error) {
+    } catch (error) {
         console.log(error);
+    }
+}
+
 export async function getEntries(): Promise<Entry[]> {
     try {
         const res = await axios.get("http://localhost:8080/api/entry/all")

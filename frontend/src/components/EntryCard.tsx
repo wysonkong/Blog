@@ -11,27 +11,22 @@ const EntryCard = ({entry}: EntryCardProp )=> {
 
     return (
         <div
-            onClick={() => navigate("/")}
+            onClick={() => navigate(`/entry/${entry.id}`)}
              className={"flex flex-col items-center justify-center"}>
-            <Card className={"p-2"}>
+            <Card className={"p-2 min-h-48"}>
                 <CardHeader>
-                    <h2>entry.date</h2>
+                    <h2></h2>
                 </CardHeader>
                 <CardTitle className={"flex justify-center items-center"}>
-                    <h1>Title</h1>
+                    <h1>{entry.title}</h1>
                 </CardTitle>
                 <CardContent>
                     <div className={"flex justify-center items-center max-w-md"}>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis cum deleniti,
-                            deserunt
-                            dolorum eveniet ex id in ipsam libero minus molestiae porro quae similique, sint suscipit
-                            tempora velit
-                            veniam!</p>
+                        <p>{entry.message}</p>
                     </div>
                 </CardContent>
                 <CardFooter className={"flex flex-col"}>
-                    <div>Created By:</div>
-                    <div>Written By:</div>
+                    <div>Created By: {entry.createdBy.username}</div>
                 </CardFooter>
 
             </Card>

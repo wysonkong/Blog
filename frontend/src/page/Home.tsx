@@ -1,12 +1,23 @@
 import EntryCard from "@/components/EntryCard.tsx";
 import {useEffect, useState} from "react";
+import type {Entry} from "@/interface/Entry.tsx";
+import {getEntries} from "@/client/Client.ts";
+
 
 const Home = () => {
-    const [entries, setEntries] = useState<number[]>([]);
+    const [entries, setEntries] = useState<Entry[]>([]);
 
     useEffect(() => {
-        setEntries([1,2,3,4,5,6])
+        getEntryData();
     }, []);
+
+    const getEntryData: () => Promise<void> = async ()=> {
+        try {
+            setEntries(await getEntries());
+        } catch (error) {
+            throw error;
+        }
+    }
 
 
     return (
