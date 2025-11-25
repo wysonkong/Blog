@@ -1,6 +1,7 @@
 import axios from "axios";
 import type {User} from "@/interface/User.tsx";
 import {toast} from "sonner";
+import type {Entry} from "@/interface/Entry.tsx";
 
 export async function login(username: string, password: string): Promise<User>  {
    try {
@@ -45,6 +46,33 @@ export async function signUp(username: string, password: string): Promise<User> 
     } catch (error) {
         toast.error("Sign Up Failed");
         console.error(error);
+        throw error;
+    }
+}
+
+
+export async function getEntryById(entryId: number): Promise<Entry> {
+    try {
+        const res = await axios.get("http://localhost:8080/api/entrty/" + entryId)
+        return res.data as Entry;
+    } catch(error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+export async function addEntry(title: string, message: string, files: FileList) {
+    try {
+
+        await axios.post("http://localhost:8080/api/entry/add", null, {
+            params: {
+                title: title,
+                message: message
+            }
+        })
+
+    } catch(error) {
+        console.log(error);
         throw error;
     }
 }

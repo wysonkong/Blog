@@ -24,4 +24,9 @@ public class EntryService {
         return entryRepository.findAll();
     }
 
+    public void addEntry(String title, String message) {
+        Entry newEntry = new Entry(title, message);
+        entryRepository.save(entry);
+    }
+
 }
