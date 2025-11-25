@@ -12,7 +12,7 @@ const Layout = ({children}: PropsWithChildren) => {
         <div>
             {!hideNavbarPaths.includes(location.pathname) && <Nav/>}
             <div className={"bg-cover bg-center relative flex min-h-svh flex-col"}>
-                <main className={"pt-16"}>{children}</main>
+                <main className={""}>{children}</main>
                 <Toaster/>
             </div>
         </div>

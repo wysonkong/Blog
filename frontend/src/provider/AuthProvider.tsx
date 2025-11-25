@@ -1,10 +1,12 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import {login, getUserById} from "@/client/Client.ts"
+import {login, getUserById, signUp} from "@/client/Client.ts"
 import type {User} from "@/interface/User.tsx"
+import {useNavigate} from "react-router";
 
 
 interface AuthContextType {
     handleLogin: (username: string, password: string) => void;
+    handleSignUp: (username: string, password: string) => void;
     handleLogout: () => void;
     user: User| null;
 }
@@ -13,6 +15,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthProvider = ({children}: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -38,7 +41,17 @@ const AuthProvider = ({children}: { children: React.ReactNode }) => {
         if(!user) return;
         sessionStorage.setItem("user", user.toString());
         console.log(user)
+        if (user) navigate("/home");
     };
+
+    const handleSignUp = async (username: string, password: string) => {
+        const curUser = await signUp(username, password);
+        setUser(curUser);
+        if(!user) return;
+        sessionStorage.setItem("user", user.toString());
+        console.log(user)
+        if (user) navigate("/home");
+    }
 
     const handleLogout = () => {
         sessionStorage.removeItem("sessionId");
@@ -46,7 +59,7 @@ const AuthProvider = ({children}: { children: React.ReactNode }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ handleLogin, handleLogout, user}}>
+        <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp, user}}>
             {children}
         </AuthContext.Provider>
     );

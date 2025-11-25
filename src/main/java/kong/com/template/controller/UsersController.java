@@ -19,8 +19,8 @@ public class UsersController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<Users> saveUser(Users user){
-        Users createdUser = usersService.saveUser(user);
+    public ResponseEntity<Users> saveUser(@RequestParam String username, @RequestParam String password){
+        Users createdUser = usersService.saveUser(username, password);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 

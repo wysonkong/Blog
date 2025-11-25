@@ -10,9 +10,10 @@ import Auth from "@/page/Auth.tsx";
 
 function App() {
     return (
-        <AuthProvider>
-            <UserProvider>
-                <Router>
+        <Router>
+            <AuthProvider>
+                <UserProvider>
+
                     <Layout>
                         <Routes>
                             <Route path={"/"} element={<Ack/>}/>
@@ -21,9 +22,10 @@ function App() {
                             <Route path={"/auth"} element={<Auth/>}/>
                         </Routes>
                     </Layout>
-                </Router>
-            </UserProvider>
-        </AuthProvider>
+                </UserProvider>
+            </AuthProvider>
+        </Router>
+
 
     )
 }

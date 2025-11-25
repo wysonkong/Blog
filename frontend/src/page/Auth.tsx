@@ -3,16 +3,14 @@ import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "@/provider/AuthProvider.tsx";
-import React, {useEffect, useState} from "react";
-import {toast} from "sonner";
+import {useEffect, useState} from "react";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
 
 const Auth = () => {
-    const {handleLogin} = useAuth();
+    const {handleLogin, handleSignUp} = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [feedback, setFeedback] = useState("");
-    const [isValid, setIsValid] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -64,7 +62,10 @@ const Auth = () => {
                                     </Field>
                                     <Field orientation="horizontal">
                                         <Button type="submit"
-                                                className={"bg-accent text-accent-foreground"}>Submit</Button>
+                                                className={"bg-accent text-accent-foreground"}
+                                        >
+                                            Submit
+                                        </Button>
                                         <Button variant="outline" type="button"
                                                 className={"bg-foreground text-background"}>Cancel</Button>
                                     </Field>
@@ -74,7 +75,7 @@ const Auth = () => {
                     </TabsContent>
                     <TabsContent value={"signup"}>
                         <h2 className="text-2xl text-card-foreground font-bold text-center mb-6">Create an Account</h2>
-                        <form onSubmit={() => console.log("clicked signup")}>
+                        <form onSubmit={(e) => {e.preventDefault(); handleSignUp(username, password)}}>
                             <FieldSet className={""}>
                                 <FieldGroup>
                                     <Field>
@@ -108,7 +109,7 @@ const Auth = () => {
                                         </FieldDescription>
                                     </Field>
                                     <Field orientation="horizontal">
-                                        <Button type="submit" disabled={!isValid}
+                                        <Button type="submit"
                                                 className={"bg-accent text-accent-foreground"}>Submit</Button>
                                         <Button variant="outline" type="reset"
                                                 className={"bg-foreground text-background"}>Reset</Button>
