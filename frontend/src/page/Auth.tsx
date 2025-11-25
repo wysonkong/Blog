@@ -1,7 +1,6 @@
 import {Field, FieldDescription, FieldGroup, FieldLabel, FieldSet} from "@/components/ui/field.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {useNavigate} from "react-router-dom";
 import {useAuth} from "@/provider/AuthProvider.tsx";
 import {useEffect, useState} from "react";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
@@ -10,8 +9,6 @@ const Auth = () => {
     const {handleLogin, handleSignUp} = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [feedback, setFeedback] = useState("");
-    const navigate = useNavigate();
 
     useEffect(() => {
         console.log(username, password);
@@ -89,9 +86,6 @@ const Auth = () => {
                                             placeholder="newuser123"
                                             className={"text-card-foreground"}
                                         />
-                                        <FieldDescription>
-                                            {feedback}
-                                        </FieldDescription>
                                     </Field>
                                     <Field>
                                         <FieldLabel htmlFor="password"

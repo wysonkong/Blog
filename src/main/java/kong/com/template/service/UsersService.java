@@ -36,8 +36,10 @@ public class UsersService {
         try {
             Users user = usersRepository.findUsersByUsername(username);
             if(user.getPassword().equals(password)) {
+                Users userToSave = user;
                 user.setLastLogin(new Date());
-                return user;
+                usersRepository.save(user);
+                return userToSave;
             } else {
                 throw new RuntimeException("Wrong Password");
             }

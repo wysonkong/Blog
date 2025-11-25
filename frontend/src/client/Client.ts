@@ -11,8 +11,9 @@ export async function login(username: string, password: string): Promise<User>  
                password
            }
        })
-       toast.success("login successful")
-       return res.data as User;
+       const newUser = res.data as User;
+       toast.success("login successful! Last Login: " + newUser.lastLogin)
+       return newUser;
    } catch(error) {
        console.error(error);
        throw error;
