@@ -50,6 +50,29 @@ export async function signUp(username: string, password: string): Promise<User> 
     }
 }
 
+
+export async function getEntryById(entryId: number): Promise<Entry> {
+    try {
+        const res = await axios.get("http://localhost:8080/api/entrty/" + entryId)
+        return res.data as Entry;
+    } catch(error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+export async function addEntry(title: string, message: string, files: FileList) {
+    try {
+
+        await axios.post("http://localhost:8080/api/entry/add", null, {
+            params: {
+                title: title,
+                message: message
+            }
+        })
+
+    } catch(error) {
+        console.log(error);
 export async function getEntries(): Promise<Entry[]> {
     try {
         const res = await axios.get("http://localhost:8080/api/entry/all")

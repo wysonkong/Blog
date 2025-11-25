@@ -5,10 +5,7 @@ import kong.com.template.entity.Entry;
 import kong.com.template.service.EntryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +29,13 @@ public class EntryController {
     public ResponseEntity<List<Entry>> getAllEntries() {
         return ResponseEntity.ok(entryService.getAllEntries());
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<Void> addEntry(@RequestParam String title, @RequestParam String message) {
+        entryService.addEntry(title, message);
+        return ResponseEntity.ok().build();
+    }
+
+
 
 }
