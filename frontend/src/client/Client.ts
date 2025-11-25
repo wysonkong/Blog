@@ -1,6 +1,7 @@
 import axios from "axios";
 import type {User} from "@/interface/User.tsx";
 import {toast} from "sonner";
+import type {Entry} from "@/interface/Entry.tsx";
 
 export async function login(username: string, password: string): Promise<User>  {
    try {
@@ -44,6 +45,16 @@ export async function signUp(username: string, password: string): Promise<User> 
         return res.data as User
     } catch (error) {
         toast.error("Sign Up Failed");
+        console.error(error);
+        throw error;
+    }
+}
+
+export async function getEntries(): Promise<Entry[]> {
+    try {
+        const res = await axios.get("http://localhost:8080/api/entry/all")
+        return res.data as Entry[]
+    } catch (error) {
         console.error(error);
         throw error;
     }
